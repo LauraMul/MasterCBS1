@@ -122,15 +122,15 @@ def builtFeatureVector(data, features, numberoffeatures, totkern, nummkern, vect
             #feature_vector.append(i[7])
             #feature_vector.append(i[13])
             #feature_vector.append(i[5])
-            #feature_vector.append(topx)
-            #feature_vector.append(topx1)
-            #feature_vector.append(topx2)
-            #feature_vector.append(wp)
+            feature_vector.append(topx)
+            feature_vector.append(topx1)
+            feature_vector.append(topx2)
+            feature_vector.append(wp)
             feature_vector.append(wp1)
-            #feature_vector.append(wp2)
-            #feature_vector.append(gk)
+            feature_vector.append(wp2)
+            feature_vector.append(gk)
             feature_vector.append(gk1)
-            #feature_vector.append(gk2)
+            feature_vector.append(gk2)
             #feature_vector.append(i[11])
             #------ hier gaat het over kern ------ #
             
@@ -143,7 +143,7 @@ def builtFeatureVector(data, features, numberoffeatures, totkern, nummkern, vect
             nummerke = nummkern[i[0]]
             vectorke = vectorkernover[nummerke]
             vectorke1 = np.array(vectorke[1:]).tolist()
-            #feature_vector.extend(vectorke1)
+            feature_vector.extend(vectorke1)
             # --- hier gaat het over branche --- #
             totaalbr = totbranch[i[20]]
             relbr = np.divide(unadj3, totaalbr)
@@ -282,17 +282,17 @@ labels = builtLabel(oi5)
 #saveFit('labels.csv',oi2)
 
 # MAKE TRAIN AND TEST SET
-featurestrain = features[:705936] #870628
-featurestest = features[705936:]
-labelstrain = labels[:705936]
-labelstest = labels[705936:]
+featurestrain = features[78437:] # for the first one we use features[:705936] #870628
+featurestest = features[:78437] #for the first one we use features [705936:]
+labelstrain = labels[78437:]
+labelstest = labels[:78437]
 
 
 
 
 #-------------------------------------- SAVE FIT  --------------------------------------------- #
 
-clf1 = RandomForestRegressor(n_estimators=60, random_state = 15325, max_features = 3)
+clf1 = RandomForestRegressor(n_estimators=10, random_state = 15325)
 regr_2 = AdaBoostRegressor(DecisionTreeRegressor(max_depth=4),
                           n_estimators=60)
 clf = clf1.fit(featurestrain, labelstrain)
